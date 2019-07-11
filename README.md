@@ -71,6 +71,7 @@ N * M = X number of ways to represent the relation.
 
 a)  A suitable schema for relation Product.
 ```sql
+
 	CREATE TABLE Product (
 	        maker VARCHAR(30),
 	        model INT, PRIMARY KEY
@@ -125,11 +126,13 @@ color.
 be ’none’ if the laptop does not have an optical disk.
 
 	AFTER TABLE Laptop ADD od VARCHAR(30) DEFAULT ‘none’;
+	
 ```
 ### Assignment 2.3.2.
 
 A suitable schema for relation Classes.
 ```sql
+
 	CREATE TABLE Classes (
 	    class INT, PRIMARY KEY
 	    type VARCHAR(30),
@@ -150,13 +153,14 @@ A suitable schema for relation Classes.
 	Outcomes( _ships_ , battle, result)
 	e)  An alteration to your Classes relation from (a) to delete the attribute
 bore.
-```sql
+
 	    1 ALTER TABLE Classes DROP bore;
 	
 	f)  An alteration to your Ships relation from (b) to include the attribute
 	yard giving the shipyard where the ship was built.
-	```sql
+	
     1 AFTER TABLE Ships ADD shipYardName VARCHAR(100) DEFAULT ‘none’;
+
 ```
 # Chapter 5 Assignments
 
