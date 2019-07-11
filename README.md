@@ -286,8 +286,8 @@ If they are two different attributes, there will be a comma between them. Rememb
 **d)**
 ```sql
 	SELECT 	model, 
-			ram, 
-			screen
+		ram, 
+		screen
 	FROM 	Laptop
 	WHERE 	price > 1500;
 ```
@@ -302,7 +302,7 @@ If they are two different attributes, there will be a comma between them. Rememb
 **f)**
 ```sql
 	SELECT 	model, 
-			hd
+		hd
 	FROM 	PC
 	WHERE 	speed = 3.2 AND price < 2000;
 ```
@@ -330,38 +330,38 @@ Examples could be: (0, 20), (1, 20) … (-1, 20) … (NULL, 20)
 ```sql
 	SELECT 	MovieStar.*
 	FROM 	MovieStar, 
-			StarsIn, 
-			Movie
+		StarsIn, 
+		Movie
 	WHERE 	MovieStar.name = StarsIn.starName
-			AND Movie.studioName = 'MGM' 
-			AND StarsIn.movieYear = 1995;
+		AND Movie.studioName = 'MGM' 
+		AND StarsIn.movieYear = 1995;
 ```
 
 **c)**
 ```sql
 	SELECT 	MovieExec.name 
 	FROM 	Studio, 
-			MovieExec 
+		MovieExec 
 	WHERE 	Studio.name = 'MGM' AND 
-			AND presC# = cert#; 
+		AND presC# = cert#; 
 ```
 
 **d)**
 ```sql
 	SELECT 	M1.title 
 	FROM 	Movie AS M1, 
-			Movie AS M2 
+		Movie AS M2 
 	WHERE 	M2.title = 'Gone With the Wind' 
-			AND M1.length > M2.length; 
+		AND M1.length > M2.length; 
 ```
 
 **e)**
 ```sql
 	SELECT 	ME1.name
 	FROM 	MovieExec AS ME1, 
-			MovieExec AS ME2
+		MovieExec AS ME2
 	WHERE 	ME1.name = 'Merv Griffin' AND
-			ME2.netWorth > ME1.netWorth;
+		ME2.netWorth > ME1.netWorth;
 ```
 
 ### Assignment 6.2.2.
@@ -370,28 +370,28 @@ Examples could be: (0, 20), (1, 20) … (-1, 20) … (NULL, 20)
 ```sql
 
 	SELECT 	product.maker AS manufacturer, 
-			laptop.speed AS gigahertz
+		laptop.speed AS gigahertz
 	FROM 	Product product, 
-			Laptop laptop
+		Laptop laptop
 	WHERE	laptop.hd >= 30
-			AND product.model = laptop.model
-			AND product.type= 'laptop';
+		AND product.model = laptop.model
+		AND product.type= 'laptop';
 ```
 
 **b)**
 ```sql
 (
 	SELECT 	Product.model, 
-			price
+		price
 	FROM 	pcstore.Product, pcstore.PC
 	WHERE 	Product.model = PC.model AND
-			maker = 'B')
+		maker = 'B')
 UNION
 (
 	SELECT 	Product.model, price
 	FROM 	Product, Laptop
 	WHERE 	Product.model = Laptop.model AND
-			maker = 'B');
+		maker = 'B');
 ```
 
 **c)**
@@ -399,10 +399,10 @@ UNION
 	SELECT 	Product.maker AS manufacturer
 	FROM 	Product
 	WHERE 	type = 'laptop' 
-			AND NOT (
-				type = 'pc' 
-				OR type = 'printer'
-				);
+		AND NOT (
+			type = 'pc' 
+			OR type = 'printer'
+			);
 ```
 
 **d)**
@@ -419,36 +419,36 @@ UNION
 
 **e)**
 ```sql
-	SELECT DISTINCT 	p1.model, 
-						p2.model, 
-						p1.speed, 
-						p1.ram
+	SELECT DISTINCT p1.model, 
+				p2.model, 
+				p1.speed, 
+				p1.ram
 						
-	FROM 				PC p1, 
-						PC p2
+	FROM 		PC p1, 
+				PC p2
 	
-	WHERE 				p1.model > p2.model
-						AND p1.speed = p2.speed
-						AND p1.ram = p2.ram;
+	WHERE 		p1.model > p2.model
+				AND p1.speed = p2.speed
+				AND p1.ram = p2.ram;
 ```
 
 **d)**
 ```sql
-	SELECT DISTINCT 	P.maker, 
-						P.type
+	SELECT DISTINCT P.maker, 
+					P.type
 						
-	FROM 				Product P, 
-						Product P1
+	FROM 		Product P, 
+				Product P1
 						
-	WHERE 				P.maker = P1.maker
-						AND P.model in (
-							SELECT 	PC.model
-							FROM 	pcstore.PC
-							WHERE 	PC.speed > 2.80                                
-						UNION
-							SELECT LP.model
-							FROM pcstore.Laptop LP
-							WHERE Lp.speed > 2.80
+	WHERE 		P.maker = P1.maker
+					AND P.model in (
+						SELECT 	PC.model
+						FROM 	pcstore.PC
+						WHERE 	PC.speed > 2.80                                
+					UNION
+						SELECT LP.model
+						FROM pcstore.Laptop LP
+						WHERE Lp.speed > 2.80
 	                  )
 		AND P1.model in (
 				SELECT 	PC.model
@@ -465,25 +465,25 @@ UNION
 **a)**
 ```sql
 	SELECT 	S.name AS shipName, 
-			C.class AS shipClass, 
-			C.displacement
+		C.class AS shipClass, 
+		C.displacement
 	FROM 	Ships S, 
-			Classes C
+		Classes C
 	WHERE 	S.class = C.class 
-			AND C.displacement > 35.000;
+		AND C.displacement > 35.000;
 ```
 
 **b)**
 ```sql
 	SELECT 	name, 
-			displacement, 
-			numguns
+		displacement, 
+		numguns
 	FROM 	Classes CL, 
-			Ships SH, 
-			Outcomes OC
+		Ships SH, 
+		Outcomes OC
 	WHERE 	CL.class = SH.class 
-			AND SH.name = OC.ship 
-			AND OC.battle='Guadalcanal';
+		AND SH.name = OC.ship 
+		AND OC.battle='Guadalcanal';
 ```
 
 **c)**
@@ -516,24 +516,24 @@ UNION
 ```sql
 	SELECT 	o1.ship 
 	FROM 	outcomes o1 
-			JOIN battles b1 ON o1.battle=b1.name,
-			outcomes o2 
-			JOIN battles b2 ON o2.battle = b2.name
+		JOIN battles b1 ON o1.battle=b1.name,
+		outcomes o2 
+		JOIN battles b2 ON o2.battle = b2.name
 	WHERE 	o1.ship = o2.ship
-			AND o1.result='damaged';
+		AND o1.result='damaged';
 ```
 
 **f)**
 ```sql
 	SELECT 	battles.name, country 
 	FROM 	battles,
-			outcomes,
-			ships,
-			classes 
+		outcomes,
+		ships,
+		classes 
 	WHERE 	battles.name=outcomes.battle 
-			AND outcomes.ship = ships.name 
-			AND ships.class=classes.class
+		AND outcomes.ship = ships.name 
+		AND ships.class=classes.class
 	GROUP BY 	battles.name, 
-				classes.country
+		classes.country
 	HAVING COUNT(classes.country) >= 1;
 ```
