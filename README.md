@@ -76,11 +76,11 @@ a)  A suitable schema for relation Product.
 	        model INT, PRIMARY KEY
 	        type VARCHAR(30)
 	);
-	```
+	
 	Product(model, maker, type)
 	
 	b)  A suitable schema for relation PC.
-	```sql
+	
 	CREATE TABLE PC (
 	        model INT, PRIMARY KEY
 	        speed FLOAT, 
@@ -88,11 +88,11 @@ a)  A suitable schema for relation Product.
 	        hd FLOAT,
 	        price INT
 	);
-	```
+	
 	PC(model, speed, ram, hd, price)
 	
 	c)  A suitable schema for relation Laptop.
-	```sql
+	
 	CREATE TABLE Laptop (
 	        model INT, PRIMARY KEY
 	        speed FLOAT,
@@ -101,29 +101,29 @@ a)  A suitable schema for relation Product.
 	        screen FLOAT,
 	        price INT
 	);
-	```
+	
 	Laptop(model, speed, ram, hd, screen, price)
 	
 	d)  A suitable schema for relation Printer.
-	```sql
+	
 	CREATE TABLE Printer (
 	        model INT, PRIMARY KEY
 	        color BOOLEAN, 
 	        type VARCHAR(30),
 	        price INT
 	);
-	```
+	
 	Printer(model, color, type, price)
 	
 	e)  An alteration to your Printer schema from (d) to delete the attribute
 color.
-```sql
+
 	ALTER TABLE Printer DROP color;
-	```
+	
 	f)  An alteration to your Laptop schema from (c) to add the attribute od
 (optical-disk type, e.g., cd or dvd). Let the default value for this attribute
 be ’none’ if the laptop does not have an optical disk.
-```sql
+
 	AFTER TABLE Laptop ADD od VARCHAR(30) DEFAULT ‘none’;
 ```
 ### Assignment 2.3.2.
@@ -138,7 +138,7 @@ A suitable schema for relation Classes.
 	    bore FLOAT,
 	    displacement FLOAT
 	);
-	```
+	
 	Classes(class, type, country, numGuns, bore, displacement)
 	
 	b)  A suitable schema for relation Ships.
@@ -152,7 +152,7 @@ A suitable schema for relation Classes.
 bore.
 ```sql
 	    1 ALTER TABLE Classes DROP bore;
-	```
+	
 	f)  An alteration to your Ships relation from (b) to include the attribute
 	yard giving the shipyard where the ship was built.
 	```sql
