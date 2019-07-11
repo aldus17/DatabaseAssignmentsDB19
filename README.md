@@ -71,25 +71,23 @@ N * M = X number of ways to represent the relation.
 
 a)  A suitable schema for relation Product.
 ```sql
-
-	CREATE TABLE Product (
-	        maker VARCHAR(30),
-	        model INT, PRIMARY KEY
-	        type VARCHAR(30)
-	);
-	
-	Product(model, maker, type)
-	
-	b)  A suitable schema for relation PC.
-	
-	CREATE TABLE PC (
-	        model INT, PRIMARY KEY
-	        speed FLOAT, 
-	        ram FLOAT
-	        hd FLOAT,
-	        price INT
-	);
-	
+CREATE TABLE Product (
+maker VARCHAR(30),
+model INT, PRIMARY KEY
+type VARCHAR(30)
+);
+```
+Product(model, maker, type)
+b)  A suitable schema for relation PC.
+```sql
+CREATE TABLE PC (
+model INT, PRIMARY KEY
+speed FLOAT, 
+ram FLOAT
+hd FLOAT,
+price INT
+);
+```
 	PC(model, speed, ram, hd, price)
 	
 	c)  A suitable schema for relation Laptop.
