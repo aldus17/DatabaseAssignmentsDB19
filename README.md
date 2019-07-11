@@ -259,8 +259,8 @@ If they are two different attributes, there will be a comma between them. Rememb
 **a)**
 ```sql
 	SELECT 	model, 
-			speed, 
-			hd
+		speed, 
+		hd
 	FROM 	PC
 	WHERE 	price < 1000;
 ```
@@ -268,8 +268,8 @@ If they are two different attributes, there will be a comma between them. Rememb
 **b)**
 ```sql
 	SELECT  model, 
-			speed AS gigahertz, 
-			hd AS gigabytes
+		speed AS gigahertz, 
+		hd AS gigabytes
 	FROM 	PC
 	WHERE 	price < 1000;
 ```
@@ -277,9 +277,9 @@ If they are two different attributes, there will be a comma between them. Rememb
 **c)**
 ```sql
 	SELECT 	maker, 
-			'type'
+		'type'
 	FROM 	Printer, 
-			Product
+		Product
 	WHERE 	Product.model = Printer.model;
 ```
 
