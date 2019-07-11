@@ -69,7 +69,7 @@ N * M = X number of ways to represent the relation.
 
 ### Assignment 2.3.1.
 
-a)  A suitable schema for relation Product.
+**a)**  A suitable schema for relation Product.
 ```sql
 CREATE TABLE Product (
 	maker VARCHAR(30),
@@ -78,7 +78,8 @@ CREATE TABLE Product (
 	);
 ```
 Product(model, maker, type)
-b)  A suitable schema for relation PC.
+
+**b)**  A suitable schema for relation PC.
 ```sql
 CREATE TABLE PC (
 	model INT, PRIMARY KEY
@@ -88,77 +89,77 @@ CREATE TABLE PC (
 	price INT
 	);
 ```
-	PC(model, speed, ram, hd, price)
+PC(model, speed, ram, hd, price)
 	
-	c)  A suitable schema for relation Laptop.
-	
-	CREATE TABLE Laptop (
-	        model INT, PRIMARY KEY
-	        speed FLOAT,
-	        ram FLOAT
-	        hd FLOAT,
-	        screen FLOAT,
-	        price INT
+**c)**  A suitable schema for relation Laptop.
+```sql
+CREATE TABLE Laptop (
+	model INT, PRIMARY KEY
+	speed FLOAT,
+	ram FLOAT
+	hd FLOAT,
+	screen FLOAT,
+	price INT
 	);
+```
+Laptop(model, speed, ram, hd, screen, price)
 	
-	Laptop(model, speed, ram, hd, screen, price)
-	
-	d)  A suitable schema for relation Printer.
-	
-	CREATE TABLE Printer (
-	        model INT, PRIMARY KEY
-	        color BOOLEAN, 
-	        type VARCHAR(30),
-	        price INT
+**d)**  A suitable schema for relation Printer.
+```sql
+CREATE TABLE Printer (
+	model INT, PRIMARY KEY
+	color BOOLEAN, 
+	type VARCHAR(30),
+	price INT
 	);
+```	
+Printer(model, color, type, price)
 	
-	Printer(model, color, type, price)
-	
-	e)  An alteration to your Printer schema from (d) to delete the attribute
+**e)**  An alteration to your Printer schema from (d) to delete the attribute
 color.
-
-	ALTER TABLE Printer DROP color;
-	
-	f)  An alteration to your Laptop schema from (c) to add the attribute od
+```sql
+ALTER TABLE Printer DROP color;
+```
+**f)**  An alteration to your Laptop schema from (c) to add the attribute od
 (optical-disk type, e.g., cd or dvd). Let the default value for this attribute
 be ’none’ if the laptop does not have an optical disk.
-
+```sql
 	AFTER TABLE Laptop ADD od VARCHAR(30) DEFAULT ‘none’;
-	
 ```
+
 ### Assignment 2.3.2.
 
-A suitable schema for relation Classes.
+**a)** A suitable schema for relation Classes.
 ```sql
-
-	CREATE TABLE Classes (
-	    class INT, PRIMARY KEY
-	    type VARCHAR(30),
-	    country VARCHAR(30),
-	    numGuns INT,
-	    bore FLOAT,
-	    displacement FLOAT
+CREATE TABLE Classes (
+	class INT, PRIMARY KEY
+	type VARCHAR(30),
+	country VARCHAR(30),
+	numGuns INT,
+	bore FLOAT,
+	displacement FLOAT
 	);
+```
+Classes(class, type, country, numGuns, bore, displacement)
 	
-	Classes(class, type, country, numGuns, bore, displacement)
+**b)**  A suitable schema for relation Ships.
+Ships( _name_ , _class_ , launched)
+
+**c)**  A suitable schema for relation Battles .
+Battles( _name_ , date)
 	
-	b)  A suitable schema for relation Ships.
-	Ships( _name_ , _class_ , launched)
-	c)  A suitable schema for relation Battles .
-	Battles( _name_ , date)
-	
-	d)  A suitable schema for relation Outcomes.
-	Outcomes( _ships_ , battle, result)
-	e)  An alteration to your Classes relation from (a) to delete the attribute
+**d)**  A suitable schema for relation Outcomes.
+Outcomes( _ships_ , battle, result)
+
+**e)** An alteration to your Classes relation from (a) to delete the attribute
 bore.
-
-	    1 ALTER TABLE Classes DROP bore;
-	
-	f)  An alteration to your Ships relation from (b) to include the attribute
+```sql
+ALTER TABLE Classes DROP bore;
+```
+**f)**  An alteration to your Ships relation from (b) to include the attribute
 	yard giving the shipyard where the ship was built.
-	
-    1 AFTER TABLE Ships ADD shipYardName VARCHAR(100) DEFAULT ‘none’;
-
+```sql
+AFTER TABLE Ships ADD shipYardName VARCHAR(100) DEFAULT ‘none’;
 ```
 # Chapter 5 Assignments
 
@@ -209,5 +210,330 @@ PI_bore(Ships NATURAL JOIN Classes)
 
 # Chapter 6 Assignments
 
+### Assignment 6.1.1.
 
+If they are two different attributes, there will be a comma between them. Remember, in SQL, two names with no punctuation between them usually indicates that the second is an alias for the first:
+```sql
+    1 	SELECT A, B
+```
 
+### Assignment 6.1.2.
+
+**a)**
+```sql
+	SELECT 	address
+	FROM 	Studio
+	WHERE 	name = 'MGM studios';
+```
+
+**b)**
+```sql
+	SELECT 	birthdate
+	FROM 	MovieStar
+	WHERE 	name = 'Sandra Bullock';
+```
+
+**c)**
+```sql
+	SELECT 	starName
+	FROM 	StarsIn
+	WHERE 	movieYear = 1980 OR movieTitle LIKE '%Love%';
+```
+
+**d)**
+```sql
+	SELECT 	*
+	FROM 	MovieExec
+	WHERE 	netWorth >= 10000000;
+```
+
+**e)**
+```sql
+	SELECT 	*
+	FROM 	MovieStar
+	WHERE 	gender = 'm' OR address LIKE '%Malibu%'; //% is like a wilcard search
+```
+
+### Assignment 6.1.3.
+
+**a)**
+```sql
+	SELECT 	model, 
+			speed, 
+			hd
+	FROM 	PC
+	WHERE 	price < 1000;
+```
+
+**b)**
+```sql
+	SELECT  model, 
+			speed AS gigahertz, 
+			hd AS gigabytes
+	FROM 	PC
+	WHERE 	price < 1000;
+```
+
+**c)**
+```sql
+	SELECT 	maker, 
+			'type'
+	FROM 	Printer, 
+			Product
+	WHERE 	Product.model = Printer.model;
+```
+
+**d)**
+```sql
+	SELECT 	model, 
+			ram, 
+			screen
+	FROM 	Laptop
+	WHERE 	price > 1500;
+```
+
+**e)**
+```sql
+	SELECT 	*
+	FROM 	printer
+	WHERE 	color; //Puts out true, if we wanted false, then we need to say, NOT color.
+```
+	
+**f)**
+```sql
+	SELECT 	model, 
+			hd
+	FROM 	PC
+	WHERE 	speed = 3.2 AND price < 2000;
+```
+
+### Assignment 6.1.5.
+
+**a)** a=10 OR b=20
+All tuples where either a = 10 and NOT NULL while b takes any value (inclusive NULL as value);
+Example could be: (10, 0), (10,1) … (10, -1) … (10, NULL).
+Or b = 20 and NOT NULL, while a can take any value including NULL.
+Examples could be: (0, 20), (1, 20) … (-1, 20) … (NULL, 20)
+	
+**b)** All tuples where a = 10 and b = 20 and none of them is NULL (10, 20)
+	
+### Assignment 6.2.1.
+
+**a)**
+```sql
+	SELECT 	name
+	FROM 	MovieStar
+	WHERE 	movieTitle = 'Titanic' AND gender = 'm';
+```
+
+**b)**
+```sql
+	SELECT 	MovieStar.*
+	FROM 	MovieStar, 
+			StarsIn, 
+			Movie
+	WHERE 	MovieStar.name = StarsIn.starName
+			AND Movie.studioName = 'MGM' 
+			AND StarsIn.movieYear = 1995;
+```
+
+**c)**
+```sql
+	SELECT 	MovieExec.name 
+	FROM 	Studio, 
+			MovieExec 
+	WHERE 	Studio.name = 'MGM' AND 
+			AND presC# = cert#; 
+```
+
+**d)**
+```sql
+	SELECT 	M1.title 
+	FROM 	Movie AS M1, 
+			Movie AS M2 
+	WHERE 	M2.title = 'Gone With the Wind' 
+			AND M1.length > M2.length; 
+```
+
+**e)**
+```sql
+	SELECT 	ME1.name
+	FROM 	MovieExec AS ME1, 
+			MovieExec AS ME2
+	WHERE 	ME1.name = 'Merv Griffin' AND
+			ME2.netWorth > ME1.netWorth;
+```
+
+### Assignment 6.2.2.
+
+**a)**
+```sql
+
+	SELECT 	product.maker AS manufacturer, 
+			laptop.speed AS gigahertz
+	FROM 	Product product, 
+			Laptop laptop
+	WHERE	laptop.hd >= 30
+			AND product.model = laptop.model
+			AND product.type= 'laptop';
+```
+
+**b)**
+```sql
+(
+	SELECT 	Product.model, 
+			price
+	FROM 	pcstore.Product, pcstore.PC
+	WHERE 	Product.model = PC.model AND
+			maker = 'B')
+UNION
+(
+	SELECT 	Product.model, price
+	FROM 	Product, Laptop
+	WHERE 	Product.model = Laptop.model AND
+			maker = 'B');
+```
+
+**c)**
+```sql
+	SELECT 	Product.maker AS manufacturer
+	FROM 	Product
+	WHERE 	type = 'laptop' 
+			AND NOT (
+				type = 'pc' 
+				OR type = 'printer'
+				);
+```
+
+**d)**
+```sql
+	SELECT 	P.hd AS HDDSize
+	FROM 	PC P
+	WHERE
+	(
+		SELECT 	COUNT(*) 
+		FROM 	PC P1
+		WHERE 	P.hd=P1.hd
+		) > 1
+```
+
+**e)**
+```sql
+	SELECT DISTINCT 	p1.model, 
+						p2.model, 
+						p1.speed, 
+						p1.ram
+						
+	FROM 				PC p1, 
+						PC p2
+	
+	WHERE 				p1.model > p2.model
+						AND p1.speed = p2.speed
+						AND p1.ram = p2.ram;
+```
+
+**d)**
+```sql
+	SELECT DISTINCT 	P.maker, 
+						P.type
+						
+	FROM 				Product P, 
+						Product P1
+						
+	WHERE 				P.maker = P1.maker
+						AND P.model in (
+							SELECT 	PC.model
+							FROM 	pcstore.PC
+							WHERE 	PC.speed > 2.80                                
+						UNION
+							SELECT LP.model
+							FROM pcstore.Laptop LP
+							WHERE Lp.speed > 2.80
+	                  )
+		AND P1.model in (
+				SELECT 	PC.model
+				FROM 	PC
+				WHERE 	PC.speed > 2.80
+			UNION
+				SELECT 	LP.model
+				FROM 	Laptop LP
+				WHERE 	LP.speed > 2.80)
+		AND P.model <> P1.model 
+```
+### Assignment 6.2.3.:
+
+**a)**
+```sql
+	SELECT 	S.name AS shipName, 
+			C.class AS shipClass, 
+			C.displacement
+	FROM 	Ships S, 
+			Classes C
+	WHERE 	S.class = C.class 
+			AND C.displacement > 35.000;
+```
+
+**b)**
+```sql
+	SELECT 	name, 
+			displacement, 
+			numguns
+	FROM 	Classes CL, 
+			Ships SH, 
+			Outcomes OC
+	WHERE 	CL.class = SH.class 
+			AND SH.name = OC.ship 
+			AND OC.battle='Guadalcanal';
+```
+
+**c)**
+```sql
+	(
+	SELECT 	S.name AS shipName
+	FROM 	Ships S
+	)
+	UNION
+	(
+	SELECT 	SO.ship AS shipName
+	FROM 	Outcomes SO;
+	)
+```
+
+**d)**
+```sql
+	SELECT 	C.country
+	FROM 	Classes C
+	WHERE 	type = 'bb'
+	
+	INTERSECT
+	
+	SELECT 	C.country
+	FROM 	battleships.Classes C
+	WHERE 	type = 'bc';
+```
+
+**e)**
+```sql
+	SELECT 	o1.ship 
+	FROM 	outcomes o1 
+			JOIN battles b1 ON o1.battle=b1.name,
+			outcomes o2 
+			JOIN battles b2 ON o2.battle = b2.name
+	WHERE 	o1.ship = o2.ship
+			AND o1.result='damaged';
+```
+
+**f)**
+```sql
+	SELECT 	battles.name, country 
+	FROM 	battles,
+			outcomes,
+			ships,
+			classes 
+	WHERE 	battles.name=outcomes.battle 
+			AND outcomes.ship = ships.name 
+			AND ships.class=classes.class
+	GROUP BY 	battles.name, 
+				classes.country
+	HAVING COUNT(classes.country) >= 1;
+```
