@@ -420,22 +420,22 @@ UNION
 **e)**
 ```sql
 	SELECT DISTINCT p1.model, 
-				p2.model, 
-				p1.speed, 
-				p1.ram
+			p2.model, 
+			p1.speed, 
+			p1.ram
 						
 	FROM 		PC p1, 
-				PC p2
+			PC p2
 	
 	WHERE 		p1.model > p2.model
-				AND p1.speed = p2.speed
-				AND p1.ram = p2.ram;
+			AND p1.speed = p2.speed
+			AND p1.ram = p2.ram;
 ```
 
-**d)**
+**f)**
 ```sql
 	SELECT DISTINCT P.maker, 
-					P.type
+			P.type
 						
 	FROM 		Product P, 
 				Product P1
@@ -534,6 +534,6 @@ UNION
 		AND outcomes.ship = ships.name 
 		AND ships.class=classes.class
 	GROUP BY 	battles.name, 
-		classes.country
+			classes.country
 	HAVING COUNT(classes.country) >= 1;
 ```
