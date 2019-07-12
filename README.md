@@ -3,7 +3,7 @@ This repository is created for Database assignment that I have made throughout m
 The Assignements are based on the book "Database Systems The Complete Book Second Edition" by Hector Garcia Molina
 # Chapter 2 Assignments
 
-### Assignment 2.2.1.
+### Assignment 2.2.1.:
 
 **a)**  The attributes of each relation.
 Accounts relation has 3 attributes acctNo, type, balance.
@@ -44,7 +44,7 @@ Customers (firstName: string, lastName: string, idNo: string, account: integer).
 Accounts: AccountNumber, typeOfAccount, AccountBalance
 Costumers: firstName, lastName, idNumber, ccustomerAccount
 
-### Assignment 2.2.2.
+### Assignment 2.2.2.:
 
 We indicate the attribute or attributes that form a key for a relation by
 underlining the key attribute(s). For instance, the Movies relation could have
@@ -53,7 +53,7 @@ its schema written as:
 Movies(title, year, length, genre)
 Beers(name, manf(Manufactured), alcoProcent)
 
-### Assignment 2.2.3.
+### Assignment 2.2.3.:
 
 **a)**  Three attributes and three tuples, like the relation Accounts of Fig. 2.6?
 The order is irrelevant as long as they are not duplicated as there cannot be 2 same instances of a key. 
@@ -67,7 +67,7 @@ There’s 5 ways to order the tuples. So, overall, there’s 5*20 = 100  possibl
 **c)**  n attributes and m tuples?
 N * M = X number of ways to represent the relation.
 
-### Assignment 2.3.1.
+### Assignment 2.3.1.:
 
 **a)**  A suitable schema for relation Product.
 ```sql
@@ -127,7 +127,7 @@ be ’none’ if the laptop does not have an optical disk.
 	AFTER TABLE Laptop ADD od VARCHAR(30) DEFAULT ‘none’;
 ```
 
-### Assignment 2.3.2.
+### Assignment 2.3.2.:
 
 **a)** A suitable schema for relation Classes.
 ```sql
@@ -163,7 +163,7 @@ AFTER TABLE Ships ADD shipYardName VARCHAR(100) DEFAULT ‘none’;
 ```
 # Chapter 5 Assignments
 
-### Assignment 5.1.1.
+### Assignment 5.1.1.:
 
 
 The  value as a set would be:
@@ -179,7 +179,7 @@ Average value of the bag would be:
 Speed{2.66, 2.10, 1.42, 2.80, 3.20, 3.20, 2.20, 2.20, 2.00, 2.80 1.86, 2.80, 3.06}/13 = 2,48
 
 
-### Assignment 5.1.2. 
+### Assignment 5.1.2.:
 
 
 The value of hd(PC) would be as a set:
@@ -194,7 +194,7 @@ hd{250, 250, 80, 250, 250, 320, 200, 250, 250, 300, 160, 160, 80}
 The average value of hd(PC) would be as a bag:
 hd{250, 250, 80, 250, 250, 320, 200, 250, 250, 300, 160, 160, 80}/13 = 215,38
 
-### Assignment 5.1.2a. 
+### Assignment 5.1.2a.:
 
 The relation πbore(Classes) as a set:
 Bore{15, 16, 14, 18}
@@ -203,21 +203,21 @@ The relation πbore(Classes) as a bag:
 Bore{15, 16, 14, 16, 15, 15, 14, 18}
 
 
-### Assignment 5.1.2b. 
+### Assignment 5.1.2b.: 
 
 To make sure we get the bore for each ship, we can assume we make a bag projection which does not eliminate any typles created and use natural join as we both relations has attributes class.
 PI_bore(Ships NATURAL JOIN Classes)
 
 # Chapter 6 Assignments
 
-### Assignment 6.1.1.
+### Assignment 6.1.1.:
 
 If they are two different attributes, there will be a comma between them. Remember, in SQL, two names with no punctuation between them usually indicates that the second is an alias for the first:
 ```sql
     1 	SELECT A, B
 ```
 
-### Assignment 6.1.2.
+### Assignment 6.1.2.:
 
 **a)**
 ```sql
@@ -254,7 +254,7 @@ If they are two different attributes, there will be a comma between them. Rememb
 	WHERE 	gender = 'm' OR address LIKE '%Malibu%'; //% is like a wilcard search
 ```
 
-### Assignment 6.1.3.
+### Assignment 6.1.3.:
 
 **a)**
 ```sql
@@ -307,7 +307,7 @@ If they are two different attributes, there will be a comma between them. Rememb
 	WHERE 	speed = 3.2 AND price < 2000;
 ```
 
-### Assignment 6.1.5.
+### Assignment 6.1.5.:
 
 **a)** a=10 OR b=20
 All tuples where either a = 10 and NOT NULL while b takes any value (inclusive NULL as value);
@@ -317,7 +317,7 @@ Examples could be: (0, 20), (1, 20) … (-1, 20) … (NULL, 20)
 	
 **b)** All tuples where a = 10 and b = 20 and none of them is NULL (10, 20)
 	
-### Assignment 6.2.1.
+### Assignment 6.2.1.:
 
 **a)**
 ```sql
@@ -364,7 +364,7 @@ Examples could be: (0, 20), (1, 20) … (-1, 20) … (NULL, 20)
 		ME2.netWorth > ME1.netWorth;
 ```
 
-### Assignment 6.2.2.
+### Assignment 6.2.2.:
 
 **a)**
 ```sql
@@ -537,3 +537,365 @@ UNION
 			classes.country
 	HAVING COUNT(classes.country) >= 1;
 ```
+
+### Assignment 6.3.1.:
+
+**a)**
+```sql
+	SELECT 	pro.maker AS maker, 
+		pc.speed AS speedOfPC
+	FROM 	Product pro, 
+		Pc pc
+	WHERE 	pc.model IN (
+			SELECT pc.model
+			FROM Pc
+			WHERE pro.model = pc.model 
+			AND pc.speed <= 3.0
+	);
+```
+
+**b)**
+```sql
+	SELECT 	p1.price AS PrinterHigestPrice, 
+		p1.model AS printerModel
+	FROM 	Printer p1
+	WHERE 	p1.price IN (
+		SELECT MAX(p2.price)
+		FROM Printer p2
+	);
+```
+
+**c)**
+```sql
+	SELECT 	l1.model AS laptopModel, 
+		l1.speed AS laptopSpeed
+	FROM 	Laptop l1
+	WHERE 	l1.speed < ANY (
+		SELECT 	p1.speed
+		FROM 	PC p1        
+	);
+```
+
+**d)**
+```sql
+	SELECT 	model, 
+		price
+	FROM 	(
+		SELECT 	model, 
+			price
+		FROM 	PC
+	UNION
+		SELECT 	model, 
+			price
+		FROM 	Laptop
+	UNION
+		SELECT 	model, 
+			price
+		FROM 	Printer) Mx1
+	WHERE 	Mx1.price IN (
+	SELECT MAX(price)
+	FROM	(
+		SELECT 	price
+		FROM 	PC
+	UNION
+		SELECT 	price
+		FROM 	Laptop
+	UNION
+		SELECT 	price
+		FROM 	Printer
+) Mx2);
+```
+
+**e)**
+```sql
+	SELECT 	pro.maker, 
+		pro.model
+	FROM 	Printer pri, 
+		Product pro
+	WHERE 	pri.color = true
+		AND pro.model = pri.model
+		AND pri.price <= all (
+		SELECT 	p.price 
+		FROM 	Printer p
+		WHERE 	pri.color = true
+	    );
+```
+
+### Assignment 6.3.2.:
+
+**a)**
+```sql
+	SELECT 	cl1.country
+	FROM 	Classes cl1
+	WHERE 	cl1.numGuns >= ALL (
+		SELECT 	cl2.numGuns
+		FROM 	Classes cl2
+	);
+```
+
+**OR THIS QUERY**
+
+```sql
+	SELECT 	cl1.country
+	FROM 	Classes cl1
+	WHERE 	cl1.numGuns = (
+		SELECT 	MAX(cl2.numGuns)
+		FROM 	Classes cl2
+);
+```
+
+**b)**
+```sql
+	SELECT 	sh.class, 
+		sh.name
+	FROM 	Ships sh
+	WHERE 	sh.name IN (
+		SELECT 	o.ship
+		FROM 	Outcomes o
+		WHERE 	o.result = 'sunk'
+);
+```
+
+**Or you can use EXISTS to test the condition under it.**
+
+```sql
+	SELECT sh.class, 
+		sh.name
+	FROM 	Ships sh
+	WHERE EXISTS(
+	SELECT 	*
+	FROM 	Outcomes o
+	WHERE 	sh.name = o.ship AND
+		o.result= 'sunk');
+```
+
+**c)**
+```sql
+	SELECT 	sh1.name, cl1.bore
+	FROM 	Ships sh1, 
+		Classes cl1
+	WHERE 	cl1.bore = ANY (
+		SELECT 	cl2.bore
+		FROM 	Classes cl2
+		WHERE 	cl1.class = sh1.class
+		AND cl2.bore = 16;
+```
+
+**d)**
+```sql
+	SELECT 	o.battle
+	FROM 	Outcomes o
+	WHERE 	o.ship IN (
+		SELECT 	sh.name
+		FROM 	Ships sh
+		WHERE 	sh.class = 'Kongo'
+);
+```
+
+### Assignment 6.4.1.:
+
+**a)**
+```sql
+	SELECT DISTINCT ON 	(pc.speed) 
+		pc.speed, 
+		pc.model
+	FROM 	PC pc 
+	WHERE 	pc.speed <= 3;
+```
+
+**b)**
+```sql
+	SELECT DISTINCT ON 	(pr.maker) pr.maker, 
+		lp.model, 
+		lp.hd
+	FROM 	Product pr, 
+		Laptop lp
+	WHERE 	pr.model = lp.model 
+		AND lp.hd <= 100;
+```
+
+**c)**
+```sql
+	SELECT DISTINCT ON 	(PC.model, PC.price) PC.model, 
+		PC.price
+	FROM 	Product pr, 
+		PC PC
+	WHERE 	pr.maker='B' 
+		AND pr.model = PC.model
+	UNION
+	SELECT DISTINCT ON 	(L.model, L.price) L.model, 
+		L.price
+	FROM 	Product pr, 
+		Laptop L
+	WHERE pr.maker='B' 
+		AND pr.model = L.model
+	UNION
+	SELECT DISTINCT ON 	(print.model, print.price) print.model, 
+		print.price
+	FROM 	Product pr, 
+		Printer print
+	WHERE pr.maker='B' 
+		AND pr.model = print.model
+```
+
+**d)**
+```sql
+	SELECT DISTINCT ON 	(print.model) print.model, 
+		print.color
+	FROM 	Printer print
+	WHERE 	print.color = true;
+```
+
+**e)**
+```sql
+	SELECT DISTINCT ON 	(pr.maker) pr.maker, 
+		pr.type
+	FROM 	Product pr
+	WHERE 	type = 'laptop';
+```
+
+### Assignment 6.4.6.:
+
+**a)**
+```sql
+	SELECT 	AVG(pc.speed)
+	FROM 	pcstore.PC pc;
+```
+
+**b)**
+```sql
+	SELECT 	AVG(lp.speed)
+	FROM 	Laptop lp
+	WHERE 	lp.price > 1000;
+```
+
+**c)**
+```sql
+	SELECT 	AVG(pc.speed)
+	FROM 	PC pc
+	JOIN 	Product pr
+	ON 	pc.model = pr.model
+	WHERE 	pr.maker = 'A';
+```
+
+**d)**
+```sql
+	SELECT AVG( price ) Avg_Price
+	FROM((
+		SELECT 	pc.Price
+		FROM 	PC pc
+		JOIN 	Product prod
+		ON 	pc.Model = prod.Model
+		WHERE 	prod.Maker = 'D')
+		UNION ALL (
+	SELECT 	l.Price
+	FROM 	Laptop l
+	JOIN 	Product prod
+	ON 	l.Model = prod.Model
+	WHERE 	prod.Maker = 'D')
+) q;
+```
+
+**e)**
+```sql
+	SELECT 	AVG(pc.price), 
+		pc.speed  
+	FROM 	PC pc 
+	GROUP BY 	pc.speed;
+```
+**f)**
+```sql
+	SELECT 	AVG(lp.screen),
+		pr.maker  
+	FROM 	Product pr
+	JOIN 	Laptop lp
+	ON pr.model = lp.model 
+		AND pr.type = 'laptop'
+	GROUP BY 	pr.maker;
+```
+
+**g)**
+```sql
+	SELECT 	pr.maker, 
+		COUNT(pr.model) 
+	FROM 	Product pr 
+	WHERE 	pr.type='pc' 
+	GROUP BY 	pr.maker 
+	HAVING COUNT(pr.model) >=3;
+```
+
+**h)**
+```sql
+	SELECT DISTINCT pr.maker, 
+		MAX(pc1.price) AS Max_Price
+	FROM 	Product pr, 
+		PC pc1
+	WHERE 	pr.type='pc' 
+		AND pc1.price=(
+			SELECT DISTINCT MAX(pc2.price) 
+			FROM 	PC pc2
+			WHERE 	pc2.model = pr.model) 
+			GROUP BY 	pr.maker;
+```
+
+**i)**
+```sql
+	SELECT DISTINCT 	pc.speed, 
+		AVG(pc.price) AS AVG_Price 
+	FROM 	PC pc 
+	INNER JOIN 	Product pr 
+	ON pc.model = pr.model 
+	-- MAtching values in both tables
+	WHERE 	pc.speed > 2
+	GROUP BY 	pc.speed
+```
+
+### Assignment 6.4.7.:
+
+**a)**
+```sql
+	SELECT 	COUNT(Class)
+	FROM 	Classes cl
+	WHERE 	cl.type = 'bb' 
+	-- BB is battleship where BC are battlecrusiers
+```
+
+**b)**
+```sql
+	SELECT 	AVG(cl.numGuns), 
+		cl.type
+	FROM 	Classes cl
+	WHERE 	cl.type = 'bb'
+	GROUP by 	cl.type 
+	-- Not needed, but just to check
+```
+
+**c)**
+```sql
+	SELECT 	AVG(cl.numGuns)
+	FROM 	Classes cl, 
+		Ships sh
+	WHERE 	sh.class = cl.class 
+		AND type = 'bb';
+	-- The result is different for both, so yes, there is a difference on how we check the number of guns for only Classes or all the bb of the the Ships. 
+```
+
+**d)**
+```sql
+	SELECT 	MIN(sh.launched), 
+		sh.class
+	FROM 	Ships sh 
+	GROUP BY 	sh.class
+```
+
+**e)**
+```sql
+	SELECT 	COUNT(o.ship), 
+		sh.class
+	FROM 	Outcomes o, 
+		Ships sh
+	WHERE 	o.ship = sh.name 
+		AND o.result = 'sunk'
+	GROUP BY 	sh.class
+```
+
