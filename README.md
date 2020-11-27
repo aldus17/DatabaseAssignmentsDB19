@@ -1,5 +1,5 @@
 # DatabaseAssignmentsDB19
-This repository is created for Database assignment that I have made throughout my Database course.
+This repository is created for Database assignment that I have made throughout my Database course. (This list is not completed, rest of the answers are in my onenote folder)
 The Assignements are based on the book "Database Systems The Complete Book Second Edition" by Hector Garcia Molina
 # Chapter 2 Assignments
 
